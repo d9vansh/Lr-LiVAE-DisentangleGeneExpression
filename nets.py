@@ -1,93 +1,87 @@
-import tensorflow.contrib.layers as tcl
 from ops import *
-# from conditional_batch_normalization import ConditionalBatchNormalization
 import tensorflow as tf
+import tensorflow.keras.layers as tkl
 
 def VGG16(inputs, out_dim, keep_prob = 0.5, is_training = True, isvae = False, size = 64):
     with tf.name_scope('conv1_1') as scope:
-        out = tcl.conv2d(inputs, num_outputs=64, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(inputs, num_outputs=64, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training':is_training})
     with tf.name_scope('conv1_2') as scope:
-        out = tcl.conv2d(out, num_outputs=64, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=64, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
-    out = tcl.max_pool2d(out, kernel_size=2, stride=2)
+    out = tkl.MaxPool2D(out, kernel_size=2, stride=2)
 
     with tf.name_scope('conv2_1') as scope:
-        out = tcl.conv2d(out, num_outputs=128, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=128, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
     with tf.name_scope('conv2_2') as scope:
-        out = tcl.conv2d(out, num_outputs=128, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=128, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
-    out = tcl.max_pool2d(out, kernel_size=2, stride=2)
+    out = tkl.MaxPool2D(out, kernel_size=2, stride=2)
 
     with tf.name_scope('conv3_1') as scope:
-        out = tcl.conv2d(out, num_outputs=256, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=256, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
     with tf.name_scope('conv3_2') as scope:
-        out = tcl.conv2d(out, num_outputs=256, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=256, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
     with tf.name_scope('conv3_3') as scope:
-        out = tcl.conv2d(out, num_outputs=256, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=256, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
-    out = tcl.max_pool2d(out, kernel_size=2, stride=2)
+    out = tkl.MaxPool2D(out, kernel_size=2, stride=2)
 
     with tf.name_scope('conv4_1') as scope:
-        out = tcl.conv2d(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=512, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
     with tf.name_scope('conv4_2') as scope:
-        out = tcl.conv2d(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=512, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
     with tf.name_scope('conv4_3') as scope:
-        out = tcl.conv2d(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=512, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
-    out = tcl.max_pool2d(out, kernel_size=2, stride=2)
+    out = tkl.MaxPool2D(out, kernel_size=2, stride=2)
 
     with tf.name_scope('conv5_1') as scope:
-        out = tcl.conv2d(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=512, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
     with tf.name_scope('conv5_2') as scope:
-        out = tcl.conv2d(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=512, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
     with tf.name_scope('conv5_3') as scope:
-        out = tcl.conv2d(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                         normalizer_fn=tcl.batch_norm,
+        out = tkl.Conv2D(out, num_outputs=512, kernel_size=3, stride=1, activation=tf.nn.relu,
+                         normalizer=tkl.BatchNormalization,
                          normalizer_params={'scale': True, 'is_training': is_training})
-    # out = tcl.max_pool2d(out, kernel_size=2, stride=2)
+    # out = tkl.MaxPool2D(out, kernel_size=2, stride=2)
 
-    out = tcl.avg_pool2d(out, kernel_size= size/(2**5), stride=size/(2**5))
+    out = tkl.AveragePooling2D(out, kernel_size= size/(2**5), stride=size/(2**5))
 
-    out = tcl.flatten(out)
+    out = tkl.Flatten(out)
 
     with tf.name_scope('fc6') as scope:
-        out = tcl.fully_connected(out, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
-                                  normalizer_params={'scale': True, 'is_training': is_training})
-        # out = tcl.dropout(out, keep_prob=keep_prob, is_training=is_training)
+        out = tkl.Dense(1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
+                                  normalizer_params={'scale': True, trainable=True})(out)
 
-    # with tf.name_scope('fc7') as scope:
-    #     out = tcl.fully_connected(out, 4096, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
-    #                               normalizer_params={'scale': True, 'is_training': is_training})
-    #     # out = tcl.dropout(out, keep_prob=keep_prob, is_training=is_training)
     if isvae:
         with tf.name_scope('fc8') as scope:
-            out1 = tcl.fully_connected(out, out_dim, activation_fn=None)
-            out2 = tcl.fully_connected(out, out_dim, activation_fn=None)
+            out1 = tkl.Dense(out_dim, activation=None)(out)
+            out2 = tkl.Dense(out_dim, activation=None)(out)
         return out1, out2
 
     else:
         with tf.name_scope('fc8') as scope:
-            out = tcl.fully_connected(out, out_dim, activation_fn=None)
+            out = tkl.Dense(out_dim, activation=None)(out)
 
         return out
 
@@ -157,8 +151,8 @@ class LatentDiscriminator(object):
         with tf.variable_scope(self.name) as scope:
             if reuse:
                 scope.reuse_variables()
-            out = tcl.fully_connected(inputs, 256, activation_fn=tf.nn.relu)
-            out = tcl.fully_connected(out, self.y_dim, activation_fn=None)
+            out = tkl.Dense(256, activation=tf.nn.relu)(inputs)
+            out = tkl.Dense(self.y_dim, activation=None)(out)
             return out
     @property
     def vars(self):
@@ -204,66 +198,63 @@ class GeneratorFace(object):
             w = self.size / (2 ** 5)
 
             with tf.name_scope('fc8') as scope:
-                out = tcl.fully_connected(z, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
-                                          normalizer_params={'scale': True, 'is_training': is_training})
-            # with tf.name_scope('fc7') as scope:
-            #     out = tcl.fully_connected(out, 4096, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
-            #                               normalizer_params={'scale': True, 'is_training': is_training})
+                out = tkl.Dense(1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
+                                          normalizer_params={'scale': True, trainable=True})(z)
             with tf.name_scope('fc6') as scope:
-                out = tcl.fully_connected(out, w*w*512, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
-                                          normalizer_params={'scale': True, 'is_training': is_training})
+                out = tkl.Dense(w*w*512, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
+                                          normalizer_params={'scale': True, 'is_training': is_training})(out)
             out = tf.reshape(out, (-1, w, w, 512))
 
             with tf.name_scope('conv5_3') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=512, kernel_size=3, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=512, kernel_size=3, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv5_2') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=512, kernel_size=3, stride=1, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv5_1') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=512, kernel_size=3, stride=1, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv4_3') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=512, kernel_size=3, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=512, kernel_size=3, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv4_2') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=512, kernel_size=3, stride=1, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv4_1') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=256, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=256, kernel_size=3, stride=1, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv3_3') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=256, kernel_size=3, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=256, kernel_size=3, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv3_2') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=256, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=256, kernel_size=3, stride=1, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv3_1') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=128, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=128, kernel_size=3, stride=1, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv2_2') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=128, kernel_size=3, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=128, kernel_size=3, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv2_1') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=64, kernel_size=3, stride=1, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=64, kernel_size=3, stride=1, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv1_2') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=64, kernel_size=3, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2DTranspose(out, num_outputs=64, kernel_size=3, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
             with tf.name_scope('conv1_1') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=3, kernel_size=3, stride=1, activation_fn=tf.nn.tanh)
+                out = tkl.Conv2DTranspose(out, num_outputs=3, kernel_size=3, stride=1, activation=tf.nn.tanh)
 
             return out
 
@@ -286,78 +277,78 @@ class GeneratorFace(object):
 #
 #             w = self.size / (2 ** 5)
 #
-#             out = fully_connected(z, 1024, use_bias=False, sn=False, scope='fc8')
+#             out = Dense(z, 1024, use_bias=False, sn=False, scope='fc8')
 #             bn8 = ConditionalBatchNormalization(self.category)
 #             out = tf.nn.relu(bn8(out, labels=labels, training = is_training))
 #
-#             out = fully_connected(out,  w*w*512, use_bias=False, sn=False, scope='fc6')
+#             out = Dense(out,  w*w*512, use_bias=False, sn=False, scope='fc6')
 #             bn6 = ConditionalBatchNormalization(self.category)
 #             out = tf.nn.relu(bn6(out, labels=labels, training = is_training))
 #
 #             out = tf.reshape(out, (-1, w, w, 512))
 #
 #             with tf.name_scope('conv5_3') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=512, kernel_size=3, stride=2, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=512, kernel_size=3, stride=2, activation=None, biases_initializer = None)
 #                 bn5_3 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn5_3(out, labels=labels, training = is_training))
 #
 #             with tf.name_scope('conv5_2') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=512, kernel_size=3, stride=1, activation=None, biases_initializer = None)
 #                 bn5_2 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn5_2(out, labels=labels, training=is_training))
 #
 #             with tf.name_scope('conv5_1') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=512, kernel_size=3, stride=1, activation=None, biases_initializer = None)
 #                 bn5_1 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn5_1(out, labels=labels, training=is_training))
 #
 #             with tf.name_scope('conv4_3') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=512, kernel_size=3, stride=2, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=512, kernel_size=3, stride=2, activation=None, biases_initializer = None)
 #                 bn4_3 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn4_3(out, labels=labels, training=is_training))
 #
 #             with tf.name_scope('conv4_2') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=512, kernel_size=3, stride=1, activation=None, biases_initializer = None)
 #                 bn4_2 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn4_2(out, labels=labels, training=is_training))
 #
 #             with tf.name_scope('conv4_1') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=256, kernel_size=3, stride=1, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=256, kernel_size=3, stride=1, activation=None, biases_initializer = None)
 #                 bn4_1 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn4_1(out, labels=labels, training=is_training))
 #
 #             with tf.name_scope('conv3_3') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=256, kernel_size=3, stride=2, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=256, kernel_size=3, stride=2, activation=None, biases_initializer = None)
 #                 bn3_3 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn3_3(out, labels=labels, training=is_training))
 #
 #             with tf.name_scope('conv3_2') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=256, kernel_size=3, stride=1, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=256, kernel_size=3, stride=1, activation=None, biases_initializer = None)
 #                 bn3_2 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn3_2(out, labels=labels, training=is_training))
 #
 #             with tf.name_scope('conv3_1') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=128, kernel_size=3, stride=1, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=128, kernel_size=3, stride=1, activation=None, biases_initializer = None)
 #                 bn3_1 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn3_1(out, labels=labels, training=is_training))
 #
 #             with tf.name_scope('conv2_2') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=128, kernel_size=3, stride=2, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=128, kernel_size=3, stride=2, activation=None, biases_initializer = None)
 #                 bn2_2 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn2_2(out, labels=labels, training=is_training))
 #
 #             with tf.name_scope('conv2_1') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=64, kernel_size=3, stride=1, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=64, kernel_size=3, stride=1, activation=None, biases_initializer = None)
 #                 bn2_1 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn2_1(out, labels=labels, training=is_training))
 #
 #             with tf.name_scope('conv1_2') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=64, kernel_size=3, stride=2, activation_fn=None, biases_initializer = None)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=64, kernel_size=3, stride=2, activation=None, biases_initializer = None)
 #                 bn1_2 = ConditionalBatchNormalization(self.category)
 #                 out = tf.nn.relu(bn1_2(out, labels=labels, training=is_training))
 #
 #             with tf.name_scope('conv1_1') as scope:
-#                 out = tcl.conv2d_transpose(out, num_outputs=3, kernel_size=3, stride=1, activation_fn=tf.nn.tanh)
+#                 out = tkl.Conv2DTranspose(out, num_outputs=3, kernel_size=3, stride=1, activation=tf.nn.tanh)
 #
 #             return out
 #
@@ -375,37 +366,37 @@ class DiscriminatorFace(object):
         with tf.variable_scope(self.name) as scope:
             if reuse:
                 scope.reuse_variables()
-            out = tcl.conv2d(inputs, num_outputs=64, kernel_size=3, stride=2, activation_fn=lrelu)
-            out = tcl.conv2d(out, num_outputs=128, kernel_size=3, stride=2, activation_fn=lrelu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(inputs, num_outputs=64, kernel_size=3, stride=2, activation=lrelu)
+            out = tkl.Conv2D(out, num_outputs=128, kernel_size=3, stride=2, activation=lrelu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=256, kernel_size=3, stride=1, activation_fn=lrelu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=256, kernel_size=3, stride=1, activation=lrelu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=256, kernel_size=3, stride=2, activation_fn=lrelu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=256, kernel_size=3, stride=2, activation=lrelu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=512, kernel_size=3, stride=1, activation_fn=lrelu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=512, kernel_size=3, stride=1, activation=lrelu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=512, kernel_size=3, stride=2, activation_fn=lrelu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=512, kernel_size=3, stride=2, activation=lrelu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=512, kernel_size=3, stride=2, activation_fn=lrelu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=512, kernel_size=3, stride=2, activation=lrelu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.avg_pool2d(out, kernel_size=self.size / (2**5), stride=self.size / (2**5))
-            out = tcl.flatten(out)
-            out = tcl.fully_connected(out, 1024, activation_fn=lrelu, normalizer_fn=tcl.batch_norm,
+            out = tkl.AveragePooling2D(out, kernel_size=self.size / (2**5), stride=self.size / (2**5))
+            out = tkl.Flatten(out)
+            out = tkl.Dense(out, 1024, activation=lrelu, normalizer=tkl.BatchNormalization,
                                       normalizer_params={'scale': True, 'is_training': is_training})
 
-            d = tcl.fully_connected(out, 1, activation_fn=None)
+            d = tkl.Dense(out, 1, activation=None)
 
-            q = tcl.fully_connected(out, 1024, activation_fn=lrelu, normalizer_fn=tcl.batch_norm,
+            q = tkl.Dense(out, 1024, activation=lrelu, normalizer=tkl.BatchNormalization,
                                       normalizer_params={'scale': True, 'is_training': is_training})
 
-            q = tcl.fully_connected(q, self.z_dim, activation_fn=None)
+            q = tkl.Dense(q, self.z_dim, activation=None)
 
             return d, q, out
 
@@ -437,15 +428,15 @@ class DiscriminatorFaceSN(object):
 
             out = lrelu(conv(out, channels=512, kernel=3, stride=2, pad=1, sn=True, scope='conv_7'))
 
-            out = tcl.avg_pool2d(out, kernel_size=self.size / (2**5), stride=self.size / (2**5))
-            out = tcl.flatten(out)
+            out = tkl.AveragePooling2D(out, kernel_size=self.size / (2**5), stride=self.size / (2**5))
+            out = tkl.Flatten(out)
 
-            out = lrelu(fully_connected(out, 1024, sn=True, scope='fc_8'))
+            out = lrelu(Dense(out, 1024, sn=True, scope='fc_8'))
 
-            y_proj = fully_connected(y, 1024, use_bias=False, sn=True, scope='y_proj')
+            y_proj = Dense(y, 1024, use_bias=False, sn=True, scope='y_proj')
             y_proj = tf.reduce_sum(y_proj * out, axis=1, keep_dims=True)
 
-            d = fully_connected(out, 1, sn=True, scope='fc_9')
+            d = Dense(out, 1, sn=True, scope='fc_9')
             return d + y_proj
 
     @property
@@ -469,23 +460,23 @@ class IdentityMnist(object):
             if reuse:
                 scope.reuse_variables()
             with tf.variable_scope('base_layers'):
-                out = tcl.conv2d(inputs, num_outputs=64, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2D(inputs, num_outputs=64, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
-                out = tcl.conv2d(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
-                                 normalizer_params={'scale': True, 'is_training': is_training})
-
-                out = tcl.conv2d(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2D(out, num_outputs=128, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.flatten(out)
+                out = tkl.Conv2D(out, num_outputs=256, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
+                                 normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.fully_connected(out, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+                out = tkl.Flatten(out)
+
+                out = tkl.Dense(out, 1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                           normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+                out = tkl.Dense(out, self.z_dim, activation=None)
 
 
             with tf.variable_scope('mean_var'):
@@ -496,8 +487,8 @@ class IdentityMnist(object):
                 variance_c = tf.nn.softplus(variance_c_var)
             if self.isrefine:
                 with tf.variable_scope('mu_logvar'):
-                    mu = tcl.fully_connected(out, self.z_dim, activation_fn=None)
-                    logvar = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+                    mu = tkl.Dense(out, self.z_dim, activation=None)
+                    logvar = tkl.Dense(out, self.z_dim, activation=None)
                 return out, mean_c, variance_c, mu, logvar
             else:
                 return out, mean_c, variance_c_var, variance_c
@@ -530,23 +521,23 @@ class IdentityMnist_fixsigma(object):
             if reuse:
                 scope.reuse_variables()
             with tf.variable_scope('base_layers'):
-                out = tcl.conv2d(inputs, num_outputs=64, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2D(inputs, num_outputs=64, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
-                out = tcl.conv2d(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
-                                 normalizer_params={'scale': True, 'is_training': is_training})
-
-                out = tcl.conv2d(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2D(out, num_outputs=128, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.flatten(out)
+                out = tkl.Conv2D(out, num_outputs=256, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
+                                 normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.fully_connected(out, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+                out = tkl.Flatten(out)
+
+                out = tkl.Dense(out, 1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                           normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+                out = tkl.Dense(out, self.z_dim, activation=None)
 
 
             with tf.variable_scope('mean_var'):
@@ -580,25 +571,25 @@ class AttributeMnist(object):
         with tf.variable_scope(self.name) as scope:
             if reuse:
                 scope.reuse_variables()
-            out = tcl.conv2d(inputs, num_outputs=64, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(inputs, num_outputs=64, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
-                             normalizer_params={'scale': True, 'is_training': is_training})
-
-            out = tcl.conv2d(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=128, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.flatten(out)
+            out = tkl.Conv2D(out, num_outputs=256, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
+                             normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.fully_connected(out, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            out = tkl.Flatten(out)
+
+            out = tkl.Dense(out, 1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                       normalizer_params={'scale': True, 'is_training': is_training})
 
-            z_mu = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_mu = tkl.Dense(out, self.z_dim, activation=None)
 
-            z_logvar = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_logvar = tkl.Dense(out, self.z_dim, activation=None)
 
             return z_mu, z_logvar
 
@@ -622,25 +613,25 @@ class EncoderMnist(object):
 
             x = tf.concat([inputs, tf.tile(y,[1, x_shapes[1], x_shapes[2], 1])], axis = 3)
 
-            out = tcl.conv2d(x, num_outputs=64, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(x, num_outputs=64, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
-                             normalizer_params={'scale': True, 'is_training': is_training})
-
-            out = tcl.conv2d(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=128, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.flatten(out)
+            out = tkl.Conv2D(out, num_outputs=256, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
+                             normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.fully_connected(out, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            out = tkl.Flatten(out)
+
+            out = tkl.Dense(out, 1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                       normalizer_params={'scale': True, 'is_training': is_training})
 
-            z_mu = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_mu = tkl.Dense(out, self.z_dim, activation=None)
 
-            z_logvar = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_logvar = tkl.Dense(out, self.z_dim, activation=None)
 
             return z_mu, z_logvar
 
@@ -662,28 +653,28 @@ class GeneratorMnist(object):
                 scope.reuse_variables()
             z = tf.concat([z_c, z_p], axis = 1)
 
-            g = tcl.fully_connected(z, 2*2*256, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Dense(z, 2*2*256, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                     normalizer_params={'scale': True, 'is_training': is_training})
             g = tf.reshape(g, (-1, 2, 2, 256))  # 2x2x256
 
-            g = tcl.conv2d_transpose(g, 256, 5, stride=2,  # 7x7x128
-                                     activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Conv2DTranspose(g, 256, 5, stride=2,  # 7x7x128
+                                     activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                      normalizer_params={'scale': True, 'is_training': is_training}, padding='VALID')
 
-            g = tcl.conv2d_transpose(g, 128, 5, stride=2,  # 14x14x64
-                                     activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Conv2DTranspose(g, 128, 5, stride=2,  # 14x14x64
+                                     activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                      normalizer_params={'scale': True, 'is_training': is_training}, padding='SAME')
 
-            g = tcl.conv2d_transpose(g, 32, 5, stride=2,  # 14x14x64
-                                     activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Conv2DTranspose(g, 32, 5, stride=2,  # 14x14x64
+                                     activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                      normalizer_params={'scale': True, 'is_training': is_training}, padding='SAME')
 
             if self.is_color:
-                g = tcl.conv2d_transpose(g, 3, 5, stride=1,  # 28x28x3
-                                         activation_fn=tf.nn.tanh, padding='SAME')
+                g = tkl.Conv2DTranspose(g, 3, 5, stride=1,  # 28x28x3
+                                         activation=tf.nn.tanh, padding='SAME')
             else:
-                g = tcl.conv2d_transpose(g, 1, 5, stride=1,  # 28x28x1
-                                         activation_fn=tf.nn.tanh, padding='SAME')
+                g = tkl.Conv2DTranspose(g, 1, 5, stride=1,  # 28x28x1
+                                         activation=tf.nn.tanh, padding='SAME')
             return g
 
     @property
@@ -701,23 +692,23 @@ class ClassifierMnist(object):
         with tf.variable_scope(self.name) as scope:
             if reuse:
                 scope.reuse_variables()
-            out = tcl.conv2d(inputs, num_outputs=64, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(inputs, num_outputs=64, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
-                             normalizer_params={'scale': True, 'is_training': is_training})
-
-            out = tcl.conv2d(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=128, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.flatten(out)
+            out = tkl.Conv2D(out, num_outputs=256, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
+                             normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.fully_connected(out, 2048, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            out = tkl.Flatten(out)
+
+            out = tkl.Dense(out, 2048, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                       normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            out = tkl.Dense(out, self.z_dim, activation=None)
 
             with tf.variable_scope('mean_var'):
                 mean_c = tf.get_variable('centers_c', [self.y_dim, self.z_dim], dtype=tf.float32,
@@ -753,14 +744,14 @@ class DiscriminatorMnistSN(object):
 
             out = lrelu(conv(out, channels=256, kernel=5, stride=2, pad=2, sn=True, scope='conv_4'))
 
-            out = tcl.flatten(out)
+            out = tkl.Flatten(out)
 
-            out = lrelu(fully_connected(out, 512, sn=True, scope='fc_8'))
+            out = lrelu(Dense(out, 512, sn=True, scope='fc_8'))
 
-            y_proj = fully_connected(y, 512, use_bias=False, sn=True, scope='y_proj')
+            y_proj = Dense(y, 512, use_bias=False, sn=True, scope='y_proj')
             y_proj = tf.reduce_sum(y_proj * out, axis=1, keep_dims=True)
 
-            d = fully_connected(out, 1, sn=True, scope='fc_9')
+            d = Dense(out, 1, sn=True, scope='fc_9')
             return d + y_proj
     @property
     def vars(self):
@@ -785,11 +776,11 @@ class DiscriminatorMnistSNComb(object):
 
             out = lrelu(conv(out, channels=256, kernel=5, stride=2, pad=2, sn=True, scope='conv_4'))
 
-            out = tcl.flatten(out)
+            out = tkl.Flatten(out)
 
-            out = lrelu(fully_connected(out, 512, sn=True, scope='fc_8'))
+            out = lrelu(Dense(out, 512, sn=True, scope='fc_8'))
 
-            d = fully_connected(out, 1, sn=True, scope='fc_9')
+            d = Dense(out, 1, sn=True, scope='fc_9')
             return d
     @property
     def vars(self):
@@ -808,24 +799,24 @@ class GeneratorSVHN(object):
                 scope.reuse_variables()
             z = tf.concat([z_c, z_p], axis = 1)
 
-            g = tcl.fully_connected(z, 2*2*256, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Dense(z, 2*2*256, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                     normalizer_params={'scale': True, 'is_training': is_training})
             g = tf.reshape(g, (-1, 2, 2, 256))  # 2x2x256
 
-            g = tcl.conv2d_transpose(g, 256, 5, stride=2,  # 7x7x128
-                                     activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Conv2DTranspose(g, 256, 5, stride=2,  # 7x7x128
+                                     activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                      normalizer_params={'scale': True, 'is_training': is_training}, padding='SAME')
 
-            g = tcl.conv2d_transpose(g, 128, 5, stride=2,  # 14x14x64
-                                     activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Conv2DTranspose(g, 128, 5, stride=2,  # 14x14x64
+                                     activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                      normalizer_params={'scale': True, 'is_training': is_training}, padding='SAME')
 
-            g = tcl.conv2d_transpose(g, 32, 5, stride=2,  # 14x14x64
-                                     activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Conv2DTranspose(g, 32, 5, stride=2,  # 14x14x64
+                                     activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                      normalizer_params={'scale': True, 'is_training': is_training}, padding='SAME')
 
-            g = tcl.conv2d_transpose(g, 3, 5, stride=2,  # 28x28x3
-                                     activation_fn=tf.nn.tanh, padding='SAME')
+            g = tkl.Conv2DTranspose(g, 3, 5, stride=2,  # 28x28x3
+                                     activation=tf.nn.tanh, padding='SAME')
             return g
 
     @property
@@ -844,23 +835,23 @@ class IdentitySVHN(object):
             if reuse:
                 scope.reuse_variables()
             with tf.variable_scope('base_layers'):
-                out = tcl.conv2d(inputs, num_outputs=64, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2D(inputs, num_outputs=64, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
-                out = tcl.conv2d(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
-                                 normalizer_params={'scale': True, 'is_training': is_training})
-
-                out = tcl.conv2d(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2D(out, num_outputs=128, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.flatten(out)
+                out = tkl.Conv2D(out, num_outputs=256, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
+                                 normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.fully_connected(out, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+                out = tkl.Flatten(out)
+
+                out = tkl.Dense(out, 1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                           normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+                out = tkl.Dense(out, self.z_dim, activation=None)
 
 
             with tf.variable_scope('mean_var'):
@@ -893,25 +884,25 @@ class AttributeSVHN(object):
         with tf.variable_scope(self.name) as scope:
             if reuse:
                 scope.reuse_variables()
-            out = tcl.conv2d(inputs, num_outputs=64, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(inputs, num_outputs=64, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
-                             normalizer_params={'scale': True, 'is_training': is_training})
-
-            out = tcl.conv2d(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=128, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.flatten(out)
+            out = tkl.Conv2D(out, num_outputs=256, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
+                             normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.fully_connected(out, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            out = tkl.Flatten(out)
+
+            out = tkl.Dense(out, 1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                       normalizer_params={'scale': True, 'is_training': is_training})
 
-            z_mu = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_mu = tkl.Dense(out, self.z_dim, activation=None)
 
-            z_logvar = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_logvar = tkl.Dense(out, self.z_dim, activation=None)
 
             return z_mu, z_logvar
 
@@ -935,25 +926,25 @@ class EncoderSVHN(object):
 
             x = tf.concat([inputs, tf.tile(y,[1, x_shapes[1], x_shapes[2], 1])], axis = 3)
 
-            out = tcl.conv2d(x, num_outputs=64, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(x, num_outputs=64, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
-                             normalizer_params={'scale': True, 'is_training': is_training})
-
-            out = tcl.conv2d(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=128, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.flatten(out)
+            out = tkl.Conv2D(out, num_outputs=256, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
+                             normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.fully_connected(out, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            out = tkl.Flatten(out)
+
+            out = tkl.Dense(out, 1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                       normalizer_params={'scale': True, 'is_training': is_training})
 
-            z_mu = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_mu = tkl.Dense(out, self.z_dim, activation=None)
 
-            z_logvar = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_logvar = tkl.Dense(out, self.z_dim, activation=None)
 
             return z_mu, z_logvar
 
@@ -979,15 +970,15 @@ class DiscriminatorSVHNSN(object):
 
             out = lrelu(conv(out, channels=256, kernel=3, stride=2, pad=1, sn=True, scope='conv_4'))
 
-            out = tcl.avg_pool2d(out, kernel_size=self.size / (2**3), stride=self.size / (2**3))
-            out = tcl.flatten(out)
+            out = tkl.AveragePooling2D(out, kernel_size=self.size / (2**3), stride=self.size / (2**3))
+            out = tkl.Flatten(out)
 
-            out = lrelu(fully_connected(out, 1024, sn=True, scope='fc_8'))
+            out = lrelu(Dense(out, 1024, sn=True, scope='fc_8'))
 
-            y_proj = fully_connected(y, 1024, use_bias=False, sn=True, scope='y_proj')
+            y_proj = Dense(y, 1024, use_bias=False, sn=True, scope='y_proj')
             y_proj = tf.reduce_sum(y_proj * out, axis=1, keep_dims=True)
 
-            d = fully_connected(out, 1, sn=True, scope='fc_9')
+            d = Dense(out, 1, sn=True, scope='fc_9')
             return d + y_proj
 
     @property
@@ -1009,28 +1000,28 @@ class GeneratorSVHNConditionalBN(object):
 
             w = self.size / (2 ** 4)
            
-            out = fully_connected(z, w*w*256, use_bias=False, sn=False, scope='fc8')
+            out = Dense(z, w*w*256, use_bias=False, sn=False, scope='fc8')
             out = tf.reshape(out, (-1, w, w, 256))
             bn6 = ConditionalBatchNormalization(self.category)
             out = tf.nn.relu(bn6(out, labels=labels, training = is_training))
          
             with tf.name_scope('conv4') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=None, biases_initializer = None)
+                out = tkl.Conv2DTranspose(out, num_outputs=256, kernel_size=5, stride=2, activation=None, biases_initializer = None)
                 bn4 = ConditionalBatchNormalization(self.category)
                 out = tf.nn.relu(bn4(out, labels=labels, training = is_training))
 
             with tf.name_scope('conv3') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=None, biases_initializer = None)
+                out = tkl.Conv2DTranspose(out, num_outputs=128, kernel_size=5, stride=2, activation=None, biases_initializer = None)
                 bn3 = ConditionalBatchNormalization(self.category)
                 out = tf.nn.relu(bn3(out, labels=labels, training=is_training))
 
             with tf.name_scope('conv2') as scope:
-                out = tcl.conv2d_transpose(out, num_outputs=32, kernel_size=5, stride=2, activation_fn=None, biases_initializer = None)
+                out = tkl.Conv2DTranspose(out, num_outputs=32, kernel_size=5, stride=2, activation=None, biases_initializer = None)
                 bn2 = ConditionalBatchNormalization(self.category)
                 out = tf.nn.relu(bn2(out, labels=labels, training=is_training))
 
             with tf.name_scope('conv1') as scope:
-                 out = tcl.conv2d_transpose(out,num_outputs=3, kernel_size=5, stride=2, activation_fn=tf.nn.tanh, padding='SAME')
+                 out = tkl.Conv2DTranspose(out,num_outputs=3, kernel_size=5, stride=2, activation=tf.nn.tanh, padding='SAME')
 
             return out
 
@@ -1052,32 +1043,32 @@ class GeneratorCifar(object):
                 scope.reuse_variables()
             z = tf.concat([z_c, z_p], axis=1)
 
-            g = tcl.fully_connected(z, 2 * 2 * 256, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Dense(z, 2 * 2 * 256, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                     normalizer_params={'scale': True, 'is_training': is_training})
             g = tf.reshape(g, (-1, 2, 2, 256))  # 2x2x256
 
-            g = tcl.conv2d_transpose(g, 256, 5, stride=2,  # 7x7x128
-                                     activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Conv2DTranspose(g, 256, 5, stride=2,  # 7x7x128
+                                     activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                      normalizer_params={'scale': True, 'is_training': is_training}, padding='SAME')
 
-            g = tcl.conv2d_transpose(g, 256, 5, stride=1,  # 7x7x128
-                                     activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Conv2DTranspose(g, 256, 5, stride=1,  # 7x7x128
+                                     activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                      normalizer_params={'scale': True, 'is_training': is_training}, padding='SAME')
 
-            g = tcl.conv2d_transpose(g, 128, 5, stride=2,  # 14x14x64
-                                     activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Conv2DTranspose(g, 128, 5, stride=2,  # 14x14x64
+                                     activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                      normalizer_params={'scale': True, 'is_training': is_training}, padding='SAME')
 
-            g = tcl.conv2d_transpose(g, 64, 5, stride=2,  # 14x14x64
-                                     activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Conv2DTranspose(g, 64, 5, stride=2,  # 14x14x64
+                                     activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                      normalizer_params={'scale': True, 'is_training': is_training}, padding='SAME')
 
-            g = tcl.conv2d_transpose(g, 32, 5, stride=2,  # 14x14x64
-                                     activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            g = tkl.Conv2DTranspose(g, 32, 5, stride=2,  # 14x14x64
+                                     activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                      normalizer_params={'scale': True, 'is_training': is_training}, padding='SAME')
 
-            g = tcl.conv2d_transpose(g, 3, 5, stride=1,  # 28x28x3
-                                     activation_fn=tf.nn.tanh, padding='SAME')
+            g = tkl.Conv2DTranspose(g, 3, 5, stride=1,  # 28x28x3
+                                     activation=tf.nn.tanh, padding='SAME')
             return g
 
     @property
@@ -1098,27 +1089,27 @@ class IdentityCifar(object):
             if reuse:
                 scope.reuse_variables()
             with tf.variable_scope('base_layers'):
-                out = tcl.conv2d(inputs, num_outputs=32, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2D(inputs, num_outputs=32, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.conv2d(out, num_outputs=64, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2D(out, num_outputs=64, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
-                out = tcl.conv2d(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
-                                 normalizer_params={'scale': True, 'is_training': is_training})
-
-                out = tcl.conv2d(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                                 normalizer_fn=tcl.batch_norm,
+                out = tkl.Conv2D(out, num_outputs=128, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
                                  normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.flatten(out)
+                out = tkl.Conv2D(out, num_outputs=256, kernel_size=5, stride=2, activation=tf.nn.relu,
+                                 normalizer=tkl.BatchNormalization,
+                                 normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.fully_connected(out, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+                out = tkl.Flatten(out)
+
+                out = tkl.Dense(out, 1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                           normalizer_params={'scale': True, 'is_training': is_training})
 
-                out = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+                out = tkl.Dense(out, self.z_dim, activation=None)
 
             with tf.variable_scope('mean_var'):
                 mean_c = tf.get_variable('centers_c', [self.y_dim, self.z_dim], dtype=tf.float32,
@@ -1128,8 +1119,8 @@ class IdentityCifar(object):
                 variance_c = tf.nn.softplus(variance_c_var)
             if self.isrefine:
                 with tf.variable_scope('mu_logvar'):
-                    mu = tcl.fully_connected(out, self.z_dim, activation_fn=None)
-                    logvar = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+                    mu = tkl.Dense(out, self.z_dim, activation=None)
+                    logvar = tkl.Dense(out, self.z_dim, activation=None)
                 return out, mean_c, variance_c, mu, logvar
             else:
                 return out, mean_c, variance_c_var, variance_c
@@ -1161,28 +1152,28 @@ class AttributeCifar(object):
         with tf.variable_scope(self.name) as scope:
             if reuse:
                 scope.reuse_variables()
-            out = tcl.conv2d(inputs, num_outputs=32, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(inputs, num_outputs=32, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=64, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=64, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
-                             normalizer_params={'scale': True, 'is_training': is_training})
-
-            out = tcl.conv2d(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=128, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.flatten(out)
+            out = tkl.Conv2D(out, num_outputs=256, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
+                             normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.fully_connected(out, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            out = tkl.Flatten(out)
+
+            out = tkl.Dense(out, 1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                       normalizer_params={'scale': True, 'is_training': is_training})
 
-            z_mu = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_mu = tkl.Dense(out, self.z_dim, activation=None)
 
-            z_logvar = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_logvar = tkl.Dense(out, self.z_dim, activation=None)
 
             return z_mu, z_logvar
 
@@ -1205,28 +1196,28 @@ class EncoderCifar(object):
             y = tf.reshape(y, [-1, 1, 1, y_shapes[1]])
 
             x = tf.concat([inputs, tf.tile(y, [1, x_shapes[1], x_shapes[2], 1])], axis=3)
-            out = tcl.conv2d(x, num_outputs=32, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(x, num_outputs=32, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=64, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=64, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
-            out = tcl.conv2d(out, num_outputs=128, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
-                             normalizer_params={'scale': True, 'is_training': is_training})
-
-            out = tcl.conv2d(out, num_outputs=256, kernel_size=5, stride=2, activation_fn=tf.nn.relu,
-                             normalizer_fn=tcl.batch_norm,
+            out = tkl.Conv2D(out, num_outputs=128, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
                              normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.flatten(out)
+            out = tkl.Conv2D(out, num_outputs=256, kernel_size=5, stride=2, activation=tf.nn.relu,
+                             normalizer=tkl.BatchNormalization,
+                             normalizer_params={'scale': True, 'is_training': is_training})
 
-            out = tcl.fully_connected(out, 1024, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm,
+            out = tkl.Flatten(out)
+
+            out = tkl.Dense(out, 1024, activation=tf.nn.relu, normalizer=tkl.BatchNormalization,
                                       normalizer_params={'scale': True, 'is_training': is_training})
 
-            z_mu = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_mu = tkl.Dense(out, self.z_dim, activation=None)
 
-            z_logvar = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_logvar = tkl.Dense(out, self.z_dim, activation=None)
 
             return z_mu, z_logvar
 
@@ -1247,13 +1238,13 @@ class GeneratorToy(object):
                 scope.reuse_variables()
             z = tf.concat([z_c, z_p], axis = 1)
 
-            g = tcl.fully_connected(z, 64, activation_fn=lrelu)
+            g = tkl.Dense(z, 64, activation=lrelu)
 
-            g = tcl.fully_connected(g, 64, activation_fn=lrelu)
+            g = tkl.Dense(g, 64, activation=lrelu)
 
-            g = tcl.fully_connected(g, 32, activation_fn=lrelu)
+            g = tkl.Dense(g, 32, activation=lrelu)
 
-            g = tcl.fully_connected(g, 2, activation_fn=None)
+            g = tkl.Dense(g, 2, activation=None)
 
             return g
 
@@ -1271,16 +1262,16 @@ class DiscriminatorToy(object):
             if reuse:
                 scope.reuse_variables()
 
-            shared = lrelu(fully_connected(x, 32, sn = True, scope='fc1'))
+            shared = lrelu(Dense(x, 32, sn = True, scope='fc1'))
 
-            shared = lrelu(fully_connected(shared, 64, sn=True, scope='fc2'))
+            shared = lrelu(Dense(shared, 64, sn=True, scope='fc2'))
 
-            shared = lrelu(fully_connected(shared, 64, sn=True, scope='fc3'))
+            shared = lrelu(Dense(shared, 64, sn=True, scope='fc3'))
 
-            y_proj = fully_connected(y, 64, use_bias=False, sn=True, scope='y_proj')
+            y_proj = Dense(y, 64, use_bias=False, sn=True, scope='y_proj')
             y_proj = tf.reduce_sum(y_proj * shared, axis=1, keep_dims=True)
 
-            d = fully_connected(shared, 1, sn=True, scope='fc4')
+            d = Dense(shared, 1, sn=True, scope='fc4')
 
             return d + y_proj
 
@@ -1299,13 +1290,13 @@ class IdentityToy(object):
             if reuse:
                 scope.reuse_variables()
             with tf.variable_scope('base_layers'):
-                out = tcl.fully_connected(x, 32, activation_fn=lrelu)
+                out = tkl.Dense(x, 32, activation=lrelu)
 
-                out = tcl.fully_connected(out, 64, activation_fn=lrelu)
+                out = tkl.Dense(out, 64, activation=lrelu)
 
-                out = tcl.fully_connected(out, 64, activation_fn=lrelu)
+                out = tkl.Dense(out, 64, activation=lrelu)
 
-                out = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+                out = tkl.Dense(out, self.z_dim, activation=None)
 
             with tf.variable_scope('mean_var'):
                 mean_c = tf.get_variable('centers_c', [self.y_dim, self.z_dim], dtype=tf.float32,
@@ -1337,15 +1328,15 @@ class AttributeToy(object):
         with tf.variable_scope(self.name) as scope:
             if reuse:
                 scope.reuse_variables()
-            out = tcl.fully_connected(x, 32, activation_fn=lrelu)
+            out = tkl.Dense(x, 32, activation=lrelu)
 
-            out = tcl.fully_connected(out, 64, activation_fn=lrelu)
+            out = tkl.Dense(out, 64, activation=lrelu)
 
-            out = tcl.fully_connected(out, 64, activation_fn=lrelu)
+            out = tkl.Dense(out, 64, activation=lrelu)
 
-            z_mu = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_mu = tkl.Dense(out, self.z_dim, activation=None)
 
-            z_logvar = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_logvar = tkl.Dense(out, self.z_dim, activation=None)
 
             return z_mu, z_logvar
 
@@ -1365,15 +1356,15 @@ class EncoderToy(object):
 
             x = tf.concat([x, y], axis=-1)
 
-            out = tcl.fully_connected(x, 32, activation_fn=lrelu)
+            out = tkl.Dense(x, 32, activation=lrelu)
 
-            out = tcl.fully_connected(out, 64, activation_fn=lrelu)
+            out = tkl.Dense(out, 64, activation=lrelu)
 
-            out = tcl.fully_connected(out, 64, activation_fn=lrelu)
+            out = tkl.Dense(out, 64, activation=lrelu)
 
-            z_mu = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_mu = tkl.Dense(out, self.z_dim, activation=None)
 
-            z_logvar = tcl.fully_connected(out, self.z_dim, activation_fn=None)
+            z_logvar = tkl.Dense(out, self.z_dim, activation=None)
 
             return z_mu, z_logvar
 
@@ -1391,8 +1382,8 @@ class LatentDiscriminatorToy(object):
         with tf.variable_scope(self.name) as scope:
             if reuse:
                 scope.reuse_variables()
-            out = tcl.fully_connected(inputs, 64, activation_fn=lrelu)
-            out = tcl.fully_connected(out, self.y_dim, activation_fn=None)
+            out = tkl.Dense(inputs, 64, activation=lrelu)
+            out = tkl.Dense(out, self.y_dim, activation=None)
             return out
     @property
     def vars(self):
