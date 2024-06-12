@@ -1,19 +1,7 @@
 import tensorflow as tf
-import tensorflow.contrib as tf_contrib
-from tensorflow.contrib.layers import xavier_initializer
-from tensorflow.contrib.layers import variance_scaling_initializer
-
 
 weight_init = tf.random_normal_initializer(mean=0.0, stddev=0.02)
-# weight_init = xavier_initializer()
-# weight_init = variance_scaling_initializer()
-
-
-# weight_regularizer = tf_contrib.layers.l2_regularizer(scale=0.0001)
 weight_regularizer = None
-
-# pad = (k-1) // 2 = SAME !
-# output = ( input - k + 1 + 2p ) // s
 
 def conv(x, channels, kernel=4, stride=2, pad=0, pad_type='zero', use_bias=True, sn=False, scope='conv_0'):
     with tf.variable_scope(scope):
@@ -97,12 +85,7 @@ def fully_connected(x, units, use_bias=True, sn=False, scope='fully_0'):
 
 
 def flatten(x) :
-    return tf.contrib.layers.flatten(x)
-
-
-#def lrelu(x, alpha=0.2):
-#    # pytorch alpha is 0.01
-#    return tf.nn.leaky_relu(x, alpha)
+    return tf.keras.layers.Flatten(x)
 
 def lrelu(x, leak=0.1, name="lrelu"):
     with tf.variable_scope(name):
@@ -140,27 +123,21 @@ def generator_loss(fake):
 
 
 
-def batch_norm(x, is_training=True, scope='batch_norm'):
-    # return tf_contrib.layers.batch_norm(x,
-    #                                     decay=0.9, epsilon=1e-05,
-    #                                     center=True, scale=True, updates_collections=None,
-    #                                     is_training=is_training, scope=scope)
-    return tf_contrib.layers.batch_norm(x,
+def batch_norm(x, scope='BatchNorm'):
+    return tf.keras.layers.BatchNormalization(x,
                                         decay=0.9, epsilon=1e-05,
-                                        center=True, scale=True,
-                                        is_training=is_training, scope=scope)
-
-    # return tf.layers.batch_normalization(x, momentum=0.99, epsilon=1e-05, center=True, scale=True, training=is_training, name=scope)
+                                        center=True, scale=True, trainable=True,
+                                        scope=scope)
 
 
-def instance_norm(x, scope='instance_norm'):
-    return tf_contrib.layers.instance_norm(x,
+def instance_norm(x, scope='GroupNormalization'):
+    return tf.keras.layers.GroupNormalization (x,
                                            epsilon=1e-05,
                                            center=True, scale=True,
                                            scope=scope)
 
 def layer_norm(x, scope='layer_norm') :
-    return tf_contrib.layers.layer_norm(x,
+    return tf.keras.layers.LayerNormalization(x,
                                         center=True, scale=True,
                                         scope=scope)
 
