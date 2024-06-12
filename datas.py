@@ -8,7 +8,8 @@ mpl.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
-from tensorflow.examples.tutorials.mnist import input_data
+import tensorflow-datasets as datasets
+input_data = datasets.load(name='mnist')
 import cPickle
 import random as random
 from sklearn.datasets import make_moons
