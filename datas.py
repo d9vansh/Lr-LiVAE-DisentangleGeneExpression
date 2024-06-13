@@ -8,8 +8,9 @@ mpl.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
-import tensorflow-datasets as datasets
-input_data = datasets.load(name='mnist')
+import tensorflow_datasets as tfds
+input_data = tfds.load(name="mnist", split=tfds.Split.TRAIN)
+
 import cPickle
 import random as random
 from sklearn.datasets import make_moons
