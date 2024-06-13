@@ -11,7 +11,7 @@ import matplotlib.gridspec as gridspec
 import tensorflow_datasets as tfds
 input_data = tfds.load(name="mnist", split=tfds.Split.TRAIN)
 
-import cPickle
+import _pickle as cPickle
 import random as random
 from sklearn.datasets import make_moons
 from scipy.io import loadmat
@@ -679,11 +679,8 @@ if __name__ == '__main__':
     sample_folder = 'Samples/three-moon-vae-adv-v2-gan-ngm3'
     if not os.path.exists(sample_folder):
         os.makedirs(sample_folder)
-    # data = SVHN(is_tanh=True)
-    # data = three_moon()
     data = Cifar10()
     X_b, Y_b = data(200)
-    # data.data2fig2jpg(X_b, Y_b)
     fig = data.data2fig(X_b, Y_b)
     plt.savefig('{}/{}.png'.format(sample_folder, 'real', bbox_inches='tight'))
     plt.close(fig)
